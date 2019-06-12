@@ -1,0 +1,7 @@
+
+
+generate-grid(basename, cols)
+  inc = 100% / cols
+  for x in 1 .. cols
+    .{basename}-{x}
+      width (x * inc)

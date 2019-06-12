@@ -1,0 +1,29 @@
+
+html
+  height 100%
+  background-repeat no-repeat
+  background-attachment fixed
+  background $background-color
+  background-image linear-gradient($background-color, $background-color2)
+
+
+body
+  margin 0
+  padding 0
+
+grid
+  display flex
+  flex-flow row wrap
+  align-content flex-start
+
+@media only screen and (max-width: 480px) {
+  generate-grid("cell-sm", 12)
+}
+
+@media only screen and (min-width: 481px) and (max-width:1023){
+  generate-grid("cell-md", 12)
+}
+
+@media only screen and (min-width: 1024px) {
+  generate-grid("cell-lg", 12)
+}
