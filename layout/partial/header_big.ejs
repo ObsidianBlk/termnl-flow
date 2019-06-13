@@ -1,0 +1,12 @@
+<div class="header-big"> 
+  <% if (page.title) { %>
+    <div class="centered-text site-title">
+      <%- page.title %>
+    </div>
+  <% } else { %>
+    <div class="centered-text site-title">
+      <%- config.title %>
+    </div>
+    <div class="centered-text site-subtitle"><%- config.subtitle %></div>
+  <% } %> 
+</div>
