@@ -10,20 +10,44 @@ html
 body
   margin 0
   padding 0
+  font $font-default
+  color $text-color-default
+
+
+@import "partial/_containers.styl"
+
+.centered-text
+  width 100%
+  text-align center
+
+.site-title
+  font $font-bigtitle
+  color $text-color-sitetitle
+
+.site-subtitle
+  font $font-smalltitle
+  color $text-color-default2
 
 grid
   display flex
   flex-flow row wrap
   align-content flex-start
 
-@media only screen and (max-width: 480px) {
-  generate-grid("cell-sm", 12)
-}
+generate-grid("cell-sm", 12)
 
-@media only screen and (min-width: 481px) and (max-width:1023){
+@media only screen and (min-width: 768px)
   generate-grid("cell-md", 12)
-}
+  .site-title
+    font $font-bigtitle-md
+  .site-subtitle
+    font $font-smalltitle-md
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px)
   generate-grid("cell-lg", 12)
-}
+  .site-title
+    font $font-bigtitle-lg
+  .site-subtitle
+    font $font-smalltitle-lg
+
+
+
