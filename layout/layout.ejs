@@ -2,7 +2,11 @@
 <html>
   <head> 
     <%- partial('partial/meta'); %>
-    <title>Dummy</title> 
+    <title><%- config.title %>
+    <% if (page.title){ %>
+      : <%- page.title %>
+    <% } %>
+    </title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
   <body>
