@@ -1,6 +1,22 @@
 <div class="grid">
   <div class="cell-md-1 cell-lg-2"></div>
   <div class="cell-sm-12 cell-md-10 cell-lg-8">
-    <%- partial('partial/header_big'); %>
+    <% if (page.current == 1) { %>
+      <%- partial('partial/header_big'); %>
+    <% } else { %>
+      Ummm... to be added :)
+    <% } %>
+
+
+    <% page.posts.each(function(post){ %>
+    <div class="term-box">
+      <div class="post-list-title">
+        <%- post.title %>
+      </div>
+      <div class="content">
+        then more stuff
+      </div>
+    </div>
+    <% }); %>
   </div>
 </div>
