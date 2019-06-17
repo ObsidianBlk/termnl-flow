@@ -16,10 +16,20 @@
 
 
 .term-box
+  display flex
   width 100%
   margin-top 0.4em
-  background $background-color2
+  background $background-content
   border 1px solid $text-color-highlight
+
+.term-box .term-box-thumb
+  width 180px
+  height 180px
+  display inline-block
+  & img
+    width inherit
+    height inherit
+    object-fit cover
 
 .content
   padding 0.85em
