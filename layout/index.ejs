@@ -8,15 +8,26 @@
     <% } %>
 
 
-    <% page.posts.each(function(post){ %>
-    <div class="term-box">
-      <div class="post-list-title">
-        <%- post.title %>
-      </div>
-      <div class="content">
-        then more stuff
-      </div>
-    </div>
-    <% }); %>
+    <% if(page.posts.length > 0){ %>
+      <% page.posts.each(function(post){ %>
+        <div class="term-box">
+          <div class="term-box-thumb">
+            <% if (post.thumbnail){ %>
+              <%- image_tag(url_for(post.thumbnail)) %>
+            <% } else { %>
+              <%- image_tag(url_for("images/default_post_bg.png")) %>
+            <% } %>
+          </div>
+          <div>
+            <div>
+              <%- post.title %>
+            </div>
+            <div>
+              <%- date(post.date) %>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    <% } %>
   </div>
 </div>
