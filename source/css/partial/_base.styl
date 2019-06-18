@@ -3,8 +3,8 @@ html
   height 100%
   background-repeat no-repeat
   background-attachment fixed
-  background $background-color
-  background-image linear-gradient($background-color, $background-color2)
+  background $color-dark
+  background-image linear-gradient($color-dark, $color-dark2)
 
 
 body
@@ -16,21 +16,31 @@ body
 
 @import "partial/_containers.styl"
 
-.centered-text
+.full-width
   width 100%
+
+.text-align-right
+  text-align right
+
+.text-align-center
   text-align center
 
 .site-title
   font $font-bigtitle
-  color $text-color-sitetitle
+  color $text-color-title
 
 .site-subtitle
   font $font-smalltitle
-  color $text-color-default2
+  color $text-color-subtitle
+
+.nav-title
+  font $font-smalltitle
+  color $color-mid
+  padding 0.2em 0em 0.2em 0.2em
 
 .post-list-title
   font $font-post-list-title
-  border-bottom 1px solid $text-color-highlight  
+  border-bottom 1px solid $color-term-border
 
 .grid
   display flex
