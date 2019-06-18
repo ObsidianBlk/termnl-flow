@@ -1,0 +1,47 @@
+.nav-menu
+  padding 0.2em 0.2em 0.2em 0
+  & ul
+    margin 0
+    padding 0
+    list-style none
+    &:first-child:before
+      color $color-term-border
+      content '/'
+
+  & li
+    display inline-block
+    padding 0
+    margin-left -0.5em
+    &:after
+      color $color-term-border
+      content '/'
+
+  & a
+    padding 0 0.4em
+    text-decoration none
+
+/*
+.nav-menu li {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2em;
+  line-height: 40px;
+  height: 40px;
+  border-bottom: 1px solid #888;
+}
+ 
+.nav-menu a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  transition: .3s background-color;
+}
+ 
+.nav-menu a:hover {
+  background-color: #005f5f;
+}
+ 
+.nav-menu a.active {
+  background-color: #fff;
+  color: #444;
+  cursor: default;
+}*/
