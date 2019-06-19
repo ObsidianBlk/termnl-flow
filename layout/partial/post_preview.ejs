@@ -1,0 +1,19 @@
+<div class="term-box">
+
+    <a class="term-box-thumb" href="<%- url_for(post.path) %>">
+    <% if (post.thumbnail){ %>
+      <%- image_tag(url_for(post.thumbnail)) %>
+    <% } else { %>
+      <%- image_tag(url_for("images/default_post_bg.png")) %>
+    <% } %>
+    </a>
+
+  <div class="full-width">
+    <div class="post-list-title">
+      <a href="<%- url_for(post.path) %>"><%- post.title %></a>
+    </div>
+    <div>
+      <%- date(post.date, config.date_format) %>
+    </div>
+  </div>
+</div>

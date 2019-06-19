@@ -11,7 +11,12 @@
       <link rel="stylesheet" type="text/css" href="<%- url_for(path) %>" />
       <% }); %>
   </head>
-  <body>
-    <%- body %>
+  <body> 
+    <div class="grid">
+      <div class="cell-md-1 cell-lg-2"></div>
+      <div class="cell-sm-12 cell-md-10 cell-lg-8">
+        <%- body %>
+      </div>
+    </div>
   </body>
 </html>

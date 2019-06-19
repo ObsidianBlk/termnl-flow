@@ -1,34 +1,13 @@
 <%- partial('partial/navbar'); %>
-<div class="grid">
-  <div class="cell-md-1 cell-lg-2"></div>
-  <div class="cell-sm-12 cell-md-10 cell-lg-8">
-    <%- partial('partial/header_big'); %>
+<%- partial('partial/header_big'); %>
 
-    <div class="grid">
-      <div class="cell-md-3 cell-lg-4"></div>
-      <div class="cell-sm-12 cell-md-9 cell-lg-8">
-        <% if(page.posts.length > 0){ %>
-          <% page.posts.each(function(post){ %>
-            <div class="term-box">
-              <div class="term-box-thumb">
-                <% if (post.thumbnail){ %>
-                  <%- image_tag(url_for(post.thumbnail)) %>
-                <% } else { %>
-                  <%- image_tag(url_for("images/default_post_bg.png")) %>
-                <% } %>
-              </div>
-              <div>
-                <div>
-                  <%- post.title %>
-                </div>
-                <div>
-                  <%- date(post.date) %>
-                </div>
-              </div>
-            </div>
-          <% }); %>
-        <% } %>
-      </div>
-    </div>
+<div class="grid">
+  <div class="cell-md-3 cell-lg-4"></div>
+  <div class="cell-sm-12 cell-md-9 cell-lg-8">
+    <% if(page.posts.length > 0){ %>
+      <% page.posts.each(function(post){ %>
+        <%- partial('partial/post_preview', {post:post}); %>        
+      <% }); %>
+    <% } %>
   </div>
 </div>
