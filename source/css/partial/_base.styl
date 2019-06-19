@@ -10,7 +10,7 @@ html
 body
   margin 0
   padding 0
-  font $font-default
+  font $font-text-size-sm $font-text
   color $text-color-default
 
 a
@@ -33,11 +33,11 @@ a
   text-align center
 
 .site-title
-  font $font-bigtitle
+  font $font-title-size-sm $font-title
   color $text-color-title
 
 .site-subtitle
-  font $font-smalltitle
+  font $font-subtitle-size-sm $font-text
   color $text-color-subtitle
 
 .nav-title
@@ -57,18 +57,28 @@ a
 generate-grid("cell-sm", 12)
 
 @media only screen and (min-width: 768px)
+  body
+    font-size $font-text-size-md
+  
   generate-grid("cell-md", 12)
+  
   .site-title
-    font $font-bigtitle-md
+    font-size $font-title-size-md
+  
   .site-subtitle
-    font $font-smalltitle-md
+    font-size $font-subtitle-size-md
 
 @media only screen and (min-width: 1024px)
+  body
+    font-text-size-lg
+
   generate-grid("cell-lg", 12)
+  
   .site-title
-    font $font-bigtitle-lg
+    font-size $font-title-size-lg
+  
   .site-subtitle
-    font $font-smalltitle-lg
+    font-size $font-subtitle-size-lg
 
 
 

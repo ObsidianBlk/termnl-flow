@@ -1,7 +1,16 @@
 
 .post-list-title
-  font $font-post-list-title
+  font $font-heading-size-sm $font-title
   width 90%
   padding 0.25em 0
   padding-left 0.25em
   border-bottom 1px solid $color-term-border
+
+
+@media only screen and (min-width: 768px)
+  .post-list-title
+    font-size $font-heading-size-md
+
+@media only screen and (min-width: 1024px)
+  .post-list-title
+    font-size $font-heading-size-lg
