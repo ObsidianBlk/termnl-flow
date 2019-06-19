@@ -5,21 +5,22 @@
       <div class="grid navshade">
         <div class="cell-sm-6">
           <div class="nav-title">
-            <%- config.title %>
+            <a href="<%- url_for("/") %>"><%- config.title %></a>
             <% if (page.title) { %>
               :<%- page.title %>
             <% } %>
           </div>
         </div>
         <div class="cell-sm-6 text-align-right">
-          <div class="nav-menu">
-            <ul>
-              <li><a href="#">Test 1</a></li>
-              <li><a href="#">Test 2</a></li>
-              <li><a href="#">Test 3</a></li>
-              <li><a href="#">Test 4</a></li>
-            </ul>
-          </div>
+          <% if (theme.navmenu) { %>
+            <div class="nav-menu">
+              <ul>
+                <% Object.keys(theme.navmenu).forEach(function(key){ %>
+                  <li><a href="<%- url_for(theme.navmenu[key]) %>"><%- key %></a></li>
+                <% }); %>
+              </ul>
+            </div>
+          <% } %>
         </div>
       </div>
     </div>

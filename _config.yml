@@ -1,7 +1,7 @@
 
 
 # Menu that will appear in the fixed position navbar.
-menu:
+navmenu:
   Archives: /archives
   Tags: /tags
   Categories: /categories

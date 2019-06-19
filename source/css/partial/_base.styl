@@ -13,6 +13,11 @@ body
   font $font-default
   color $text-color-default
 
+a
+  text-decoration none
+  color lighten($color-dim, 30%)
+  &:hover
+    color $color-light
 
 @import "partial/_containers.styl"
 @import "partial/_navmenu.styl"
@@ -38,6 +43,10 @@ body
   font $font-smalltitle
   color $color-mid
   padding 0.2em 0em 0.2em 0.2em
+  & a
+    color inherit
+    &:hover
+      color inherit
 
 .post-list-title
   font $font-post-list-title
