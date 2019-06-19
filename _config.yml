@@ -1,0 +1,15 @@
+
+
+# Menu that will appear in the fixed position navbar.
+menu:
+  Archives: /archives
+  Tags: /tags
+  Categories: /categories
+
+
+# The CSS files to load in the header.
+css:
+  - css/normalize.css
+  - css/style.css
+
+

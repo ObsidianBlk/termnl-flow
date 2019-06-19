@@ -7,8 +7,9 @@
       : <%- page.title %>
     <% } %>
     </title>
-    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <% theme.css.forEach(function(path){ %>
+      <link rel="stylesheet" type="text/css" href="<%- path %>" />
+      <% }); %>
   </head>
   <body>
     <%- body %>
