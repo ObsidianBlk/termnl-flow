@@ -36,19 +36,38 @@
 .term-box
   display flex
   width 100%
-  margin-top 0.4em
+  margin-top 10px
   background $color-terminal
   border 1px solid $color-term-border
 
 .term-box .term-box-thumb
-  width 180px
-  height 180px
+  position relative
+  width 112px
+  height auto
   display inline-block
+  overflow hidden
   border-right 1px solid $color-term-border
   & img
-    width inherit
-    height inherit
-    object-fit cover
+    position absolute
+    display block
+    top 50%
+    left 50%
+    min-width 100%
+    min-height 100%
+    transform translate(-50%, -50%)
 
 .content
   padding 0.85em
+
+
+@media only screen and (min-width: 768px)
+  .term-box .term-box-thumb
+    width 120px
+    height 120px
+
+@media only screen and (min-width: 1024px)
+  .term-box .term-box-thumb
+    width 128px
+    height 128px
+
+
