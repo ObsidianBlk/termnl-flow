@@ -2,10 +2,35 @@
 .post-list-title
   font $font-heading-size-sm $font-title
   width 90%
-  padding 0.25em 0
-  padding-left 0.25em
+  padding 6px 0
+  padding-left 6px
   border-bottom 1px solid $color-term-border
 
+.post-list-dateblock
+  width 75%
+  padding 6px 0
+  padding-left 6px
+  color $color-mid
+  border-bottom 1px solid $color-term-border
+
+.post-list-date
+  font-style italic
+  color $color-mid
+
+.post-list-content
+  width 100%
+  padding 6px 0
+  padding-left 6px
+  & p
+    padding 0
+    margin 0
+
+
+
+
+
+// Adjusting what needs adjusting for the different
+// media queries.
 
 @media only screen and (min-width: 768px)
   .post-list-title

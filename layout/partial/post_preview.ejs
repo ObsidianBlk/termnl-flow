@@ -1,19 +1,30 @@
 <div class="term-box">
 
-    <a class="term-box-thumb" href="<%- url_for(post.path) %>">
+  <a class="term-box-thumb" href="<%- url_for(post.path) %>">
     <% if (post.thumbnail){ %>
       <%- image_tag(url_for(post.thumbnail)) %>
     <% } else { %>
       <%- image_tag(url_for("images/default_post_bg.png")) %>
     <% } %>
-    </a>
+  </a>
 
   <div class="full-width">
     <div class="post-list-title">
       <a href="<%- url_for(post.path) %>"><%- post.title %></a>
     </div>
-    <div>
-      <%- date(post.date, config.date_format) %>
+    <div class="post-list-dateblock">
+      <% if (post.updated.unix() !== post.date.unix()){ %>
+      Updated: <span class="post-list-date"><%- date(post.updated, config.date_format) %></span>
+      <% } else { %>
+      Posted: <span class="post-list-date"><%- date(post.date, config.date_format) %></span>
+      <% } %> 
+    </div>
+    <div class="post-list-content">
+      <% if (post.except) { %>
+      <%- truncate(strip_html(post.except), {length: 100, separator: ' ', ommision: "..."}); %>
+      <% } else { %>
+      <%- truncate(strip_html(post.content), {length: 100, separator: ' ', ommision: "..."});  %>
+      <% } %>      
     </div>
   </div>
 </div>
