@@ -1,5 +1,5 @@
 .nav-menu
-  padding 0.2em 0.2em 0.2em 0
+  vertical-align middle
   & ul
     margin 0
     padding 0
@@ -19,3 +19,25 @@
   & a
     padding 0 0.4em
     font-weight bold
+
+
+.nav-title
+  vertical-align middle
+  font $font-heading-size-sm $font-title
+  color $text-color-title
+  & a
+    color inherit
+    &:hover
+      color inherit
+
+
+@media only screen and (min-width: 768px)
+  .nav-title
+    font-size $font-heading-size-md
+
+@media only screen and (min-width: 1024px)
+  .nav-title
+    font-size $font-heading-size-lg
+
+
+
