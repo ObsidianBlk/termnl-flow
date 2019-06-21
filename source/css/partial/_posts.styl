@@ -27,9 +27,16 @@
 
 .post-content
   margin-top 48px
-  
 
+h2.post-title
+  font $font-title-size-sm $font-title
+  color $color-light
+  margin 0 
 
+h3.post-date
+  font $font-subtitle-size-sm $font-text
+  color $color-mid
+  margin 0
 
 
 // Adjusting what needs adjusting for the different
@@ -39,6 +46,14 @@
   .post-list-title
     font-size $font-heading-size-md
 
+  h1.post-title
+    font-size $font-title-size-md
+
 @media only screen and (min-width: 1024px)
   .post-list-title
     font-size $font-heading-size-lg
+
+  h1.post-title
+    font-size $font-title-size-lg
+
+
