@@ -3,3 +3,23 @@
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
 <meta name="Content-Type-Script" content="text/javascript">
 <meta name="Content-Type-Style" content="text/css">
+
+<% if (page.excerpt) { %>
+  <meta name="description" content="<%= page.excerpt %>">
+<% } if (config.description) { %>
+  <meta name="description" content="<%= config.description %>">
+<% } %>
+<% if (config.author) { %>
+  <meta name="author" content="<%= config.author %>">
+<% } %>
+<% if (config.keyword) { %>
+  <meta name="keyword" content="<%= config.keyword %>">
+<% } %>
+
+<% if (config.favicon){ %>
+  <link rel="shortcut icon" href="<%- config.favicon %>">
+<% } %>
+
+
+
+
