@@ -35,6 +35,10 @@ a
 .text-align-center
   text-align center
 
+.hidden
+  display none
+
+
 .site-title
   font $font-title-size-sm $font-title
   color $text-color-title
@@ -50,9 +54,16 @@ a
 
 generate-grid("cell-sm", 12)
 
+@media only screen and (max-width: 767px)
+  .hidden-sm, .hidden-sm-md
+    display none
+
 @media only screen and (min-width: 768px)
   body
     font-size $font-text-size-md
+
+  .hidden-md, .hidden-sm-md, .hidden-md-lg
+    display none
   
   generate-grid("cell-md", 12)
   
@@ -65,6 +76,9 @@ generate-grid("cell-sm", 12)
 @media only screen and (min-width: 1024px)
   body
     font-text-size-lg
+
+  .hidden-lg, .hidden-md-lg
+    display none
 
   generate-grid("cell-lg", 12)
   
