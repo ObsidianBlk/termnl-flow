@@ -2,13 +2,13 @@
 .navbar
   position fixed
   width 100%
-  height 48px
+  height $navbar-height
   left 0
   top 0
   z-index 999
 
 .navbar .navshade
-  background alpha($color-terminal, 0.5)
+  background $color-terminal
   border-left 1px solid $color-term-border
   border-right 1px solid $color-term-border
   border-bottom 1px solid $color-term-border
@@ -36,9 +36,10 @@
 .term-box
   display flex
   width 100%
-  margin-top 10px
   background $color-terminal
   border 1px solid $color-term-border
+  &.term-chained
+    margin-top 10px
 
 // Term-box-thumb improvements based on answer found...
 // https://stackoverflow.com/questions/19192892/css-how-can-i-set-image-size-relative-to-parent-height
