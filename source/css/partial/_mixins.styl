@@ -6,3 +6,17 @@ generate-grid(basename, cols)
     .{basename}-{x}
       width (x * inc)
       display inline-block
+
+generate-decoration-bottom(count, minLen, maxLen)
+  step = (maxLen - minLen)/count
+  clen = minLen
+  for x in 1 .. count
+    .decoration-bottom-{clen}
+      position relative
+      &:after
+        content ''
+        position absolute
+        bottom -1px
+        width percentage(clen/100)
+        border-bottom: 1px solid $color-term-border
+    clen += step
