@@ -6,17 +6,14 @@
         <div class="cell-sm-6">
           <div class="nav-title">
             <a href="<%- url_for("/") %>"><%- config.title %></a>
-            <% if (page.title) { %>
-              :<%- page.title %>
-            <% } %>
           </div>
         </div>
         <div class="cell-sm-6 text-align-right">
           <% if (theme.navmenu) { %>
             <div class="nav-menu">
               <ul>
-                <% Object.keys(theme.navmenu).forEach(function(key){ %>
-                  <li><a href="<%- url_for(theme.navmenu[key]) %>"><%- key %></a></li>
+                <% theme.navmenu.forEach(function(item){ %>
+                  <li><a href="<%- url_for(item.url) %>"><%- item.name %></a></li>
                 <% }); %>
               </ul>
             </div>
