@@ -4,13 +4,13 @@
 navmenu:
   - name: Archives
     url: /archives
-    fa-icon: ~
+    fa_icon: archive
   - name: Tags
     url: /tags
-    fa-icon: ~
+    fa_icon: tags
   - name: Categories
     url: /categories
-    fa-icon: ~
+    fa_icon: folder
 
 
 # The CSS files to load in the header.
