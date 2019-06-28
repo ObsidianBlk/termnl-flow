@@ -25,6 +25,15 @@
     padding 0
     margin 0
 
+
+.post-heading
+  width 100%
+
+.post-heading-img
+  & img
+    width 125px
+    height 125px
+
 .post-content
   margin-top 48px
 
@@ -46,8 +55,28 @@ h3.post-date
   .post-list-title
     font-size $font-heading-size-md
 
+  .post-heading
+    width 75%
+
   h1.post-title
     font-size $font-title-size-md
+
+  .term-box-post-thumb
+    position relative
+    width 125px !important
+    height 125px !important
+    display inline-block
+    overflow hidden
+    border-right 1px solid $color-term-border
+    border-bottom 1px solid $color-term-border
+    & img
+      position absolute
+      display block
+      top 50%
+      left 50%
+      min-width 100%
+      min-height 100%
+      transform translate(-50%, -50%)
 
 @media only screen and (min-width: 1024px)
   .post-list-title

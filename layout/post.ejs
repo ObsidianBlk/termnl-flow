@@ -2,23 +2,43 @@
 <article class="page-head">
   <div class=term-box">
     <div>
-      <div class="decoration-bottom-90">
-        <div class="content-left">
-          <h2 class="post-title"><%- page.title %></h2>
+      <div style="display: flex">
+        <a class="term-box-post-thumb hidden-sm" href="<%- url_for(page.path) %>">
+          <% if (page.thumbnail){ %>
+            <%- image_tag(url_for(page.thumbnail)) %>
+          <% } else { %>
+            <%- image_tag(url_for("images/default_post_bg.png")) %>
+          <% } %>
+        </a>
+        <div class="post-heading">
+          <div class="decoration-bottom-90">
+            <div class="content-left">
+              <h2 class="post-title"><%- page.title %></h2>
+            </div>
+          </div>
+          <div class="decoration-bottom-75">
+            <div class="content-left content-vertical">
+              <h3 class="post-date">
+                <% if (page.updated.unix() !== page.date.unix()){ %>
+                  Updated: <i><%- date(page.updated, config.date_format) %></i>
+                <% } else { %>
+                  Posted: <i><%- date(page.date, config.date_format) %></i>
+                <% } %>
+              </h3>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="decoration-bottom-75">
-        <div class="content-left content-vertical">
-          <h3 class="post-date">
-            <% if (page.updated.unix() !== page.date.unix()){ %>
-              Updated: <i><%- date(page.updated, config.date_format) %></i>
+      <div class="content">
+        <div class="full-width text-align-center hidden-md-lg">
+          <div class="post-heading-img">
+            <% if (page.thumbnail){ %>
+              <%- image_tag(url_for(page.thumbnail)) %>
             <% } else { %>
-              Posted: <i><%- date(page.date, config.date_format) %></i>
+              <%- image_tag(url_for("images/default_post_bg.png")) %>
             <% } %>
-          </h3>
+          </div>
         </div>
-      </div>
-      <div class="content"> 
         <%- page.content %>
       </div>
     </div>
