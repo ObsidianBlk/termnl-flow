@@ -19,10 +19,17 @@
           <div class="decoration-bottom-75">
             <div class="content-left content-vertical">
               <h3 class="post-date">
-                <% if (page.updated.unix() !== page.date.unix()){ %>
-                  Updated: <i><%- date(page.updated, config.date_format) %></i>
+                <% if (page.author){ %>
+                  By: <i><%- page.author %></i>,
+                <% } else if (config.author){ %>
+                  By: <i><%- config.author %></i>,
                 <% } else { %>
-                  Posted: <i><%- date(page.date, config.date_format) %></i>
+                  By: <i>Some Mystery Person</i>,
+                <% } %>
+                <% if (page.updated.unix() !== page.date.unix()){ %>
+                Updated: <i><%- date(page.updated, config.date_format) %></i> &#64; <i><%- time(page.updated, config.time_format) %></i>
+                <% } else { %>
+                  Posted: <i><%- date(page.date, config.date_format) %></i> &#64; <i><%- time(page.date, config.time_format) %></i>
                 <% } %>
               </h3>
             </div>
@@ -41,6 +48,29 @@
         </div>
         <%- page.content %>
       </div>
+
+      <% if (page.prev || page.next){ %>
+        <div class="grid">
+          <div class="cell-sm-6">
+            <% if (page.prev) { %>
+              <div class="post-prev-decoration">
+                <div class="content">
+                  <a href="<%- url_for(page.prev) %>">Previous Post</a>
+                </div>
+              </div>
+            <% } %>
+          </div>
+          <div class="cell-sm-6 text-align-right">
+            <% if (page.next) { %>
+              <div class="post-next-decoration">
+                <div class="content">
+                  <a href="<%- url_for(page.next) %>">Next Post</a>
+                </div>
+              </div>
+            <% } %>
+          </div>
+        </div>
+      <% } %>
     </div>
   </div>
 </article>

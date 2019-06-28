@@ -37,6 +37,29 @@
 .post-content
   margin-top 48px
 
+.post-prev-decoration
+  position relative
+  width 100%
+  &:after
+    position absolute
+    content '' 
+    left 0
+    top 0
+    width 50%
+    border-top 1px solid $color-term-border
+
+.post-next-decoration
+  position relative
+  width 100%
+  &:after
+    position absolute
+    content ''
+    top 0
+    left 50%
+    width 50%
+    border-top 1px solid $color-term-border
+
+
 h2.post-title
   font $font-title-size-sm $font-title
   color $color-light
@@ -61,6 +84,9 @@ h3.post-date
   h1.post-title
     font-size $font-title-size-md
 
+  // I don't like this here... it's nearly identical to the
+  // .term-box-thumb class, but, I can't seem to successfully
+  // override that class. Sooo... here this is for now.
   .term-box-post-thumb
     position relative
     width 125px !important
