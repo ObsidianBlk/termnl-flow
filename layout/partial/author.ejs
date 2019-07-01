@@ -1,0 +1,24 @@
+<% if (config.author){ %>
+  <div class="author-box">
+      <div class="author-img">
+      <% if (config.author_photo){ %>
+        <img class="rounded" src="<%- url_for(config.author_photo) %>" alt="<%- config.author %>" />
+      <% } else { %>
+        <i class="fa fa-user" style="font-size: 150px"></i>
+      <% } %>
+      </div>
+      <div>
+        <span class="key">Name:</span> <%- config.author %><br>
+        <% if (config.social) { %>
+        <span class="key">Social:</span> <%- partial('partial/socials') %>
+        <% } %>
+        <br>
+        <span class="key">About:</span>
+      </div>
+      <div class="author-info">
+        <% if (config.author_blurb){ %>
+          <%- config.author_blurb %>
+        <% } %>
+      </div>
+  </div>
+<% } %>
