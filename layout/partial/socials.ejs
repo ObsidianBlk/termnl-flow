@@ -1,0 +1,19 @@
+<% if (config.social) { %>
+  <% Object.keys(config.social).forEach(function(key){ %>
+    <% switch(key) {
+      case "facebook":
+      case "linkedin":
+      case "twitter":
+      case "mastodon":
+      case "reddit":
+      case "snapchat":
+      case "twitch":
+      case "youtube":
+      case "github":
+      case "gitlab":
+      case "gitkraken":
+      case "stack-overflow": %>
+        <%- partial("partial/social_icon", {social_url:config.social[key], iconname:key}); %>
+    <% } %>
+  <% }); %>
+<% } %>
