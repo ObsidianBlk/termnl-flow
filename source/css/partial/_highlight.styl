@@ -1,0 +1,112 @@
+// Modified from...
+// https://github.com/chriskempson/tomorrow-theme
+
+$highlight-background = $color-dark2
+$highlight-current-line = $color-dark
+$highlight-selection = #d6d6d6
+$highlight-foreground = $color-bright
+$highlight-comment = #928779 //!
+$highlight-red = #cf5c36 //!
+$highlight-orange = #f7ce5b //!
+$highlight-yellow = #f2ed6f //!
+$highlight-green = #a5b452 //!
+$highlight-aqua = #b4d2ba //!
+$highlight-blue = #7a9aac
+$highlight-purple = #8a84a6
+$highlight-grey = #777
+
+pre, code
+  font-family font-mono
+  color $highlight-foreground
+  background $highlight-background
+  font-size 0.95em
+
+code
+  padding 0 5px
+
+pre
+  padding 10px 15px
+  line-height 22px
+  code
+    border none
+    display block
+    padding 0
+
+.highlight
+  background $highlight-background
+  padding 10px 15px
+  color $highlight-foreground
+  overflow auto
+  margin 0
+  table
+    margin 0 !important
+    border 0
+    th, td
+      padding 0
+  figcaption
+    //clearfix()
+    margin -5px 0 5px
+    font-size 0.9em
+    color $highlight-grey
+    a
+      float right
+  .gutter pre 
+    color $color-mid
+    padding-right 0.15em
+    border-right 1px solid $color-mid
+  pre
+    padding 0
+    border none
+    background none
+  .line
+    height 22px
+
+pre
+  .comment
+  .title
+    color $highlight-comment
+  .variable
+  .attribute
+  .tag
+  .regexp
+  .ruby .constant
+  .xml .tag .title
+  .xml .pi
+  .xml .doctype
+  .html .doctype
+  .css .id
+  .css .class
+  .css .pseudo
+    color $highlight-red
+  .number
+  .preprocessor
+  .built_in
+  .literal
+  .params
+  .constant
+    color $highlight-orange
+  .class
+  .ruby .class .title
+  .css .rules .attribute
+    color $highlight-green
+  .string
+  .value
+  .inheritance
+  .header
+  .ruby .symbol
+  .xml .cdata
+    color $highlight-green
+  .css .hexcolor
+    color $highlight-aqua
+  .function
+  .python .decorator
+  .python .title
+  .ruby .function .title
+  .ruby .title .keyword
+  .perl .sub
+  .javascript .title
+  .coffeescript .title
+    color $highlight-blue
+  .keyword
+  .javascript .function
+    color $highlight-purple
