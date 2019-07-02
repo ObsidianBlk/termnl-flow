@@ -1,14 +1,17 @@
 <div class="header-big">
-  <div>
-    <% if (page.title) { %>
-      <div class="full-width text-align-center site-title">
-        <%- page.title %>
-      </div>
-    <% } else { %>
-      <div class="full-width text-align-center site-title">
-        <%- config.title %>
-      </div>
-      <div class="full-width text-align-center site-subtitle"><%- config.subtitle %></div>
-    <% } %>
+  <canvas class="header-canvas"></canvas>
+  <div class="header-title">
+    <div>
+      <% if (page.title) { %>
+        <div class="full-width text-align-center site-title">
+          <%- page.title %>
+        </div>
+      <% } else { %>
+        <div class="full-width text-align-center site-title">
+          <%- config.title %>
+        </div>
+        <div class="full-width text-align-center site-subtitle"><%- config.subtitle %></div>
+      <% } %>
+    </div>
   </div> 
 </div>

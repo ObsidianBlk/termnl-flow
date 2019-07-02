@@ -15,23 +15,23 @@
   padding 4px 4px
 
 
-.header-big
-  display flex
-  align-items center
-  justify-content center
+.header-big 
   width 100%
   height 200px
   position relative
   background $color-dark
-  border-bottom 1px solid $color-term-border
-  &:after
-    content ''
+  & .header-canvas
+    width 100%
+    height 200px
+  & .header-title
     position absolute
-    bottom -1px
-    left 25%
-    width 50%
-    border-bottom: 1px solid $color-dark
-
+    display flex
+    align-items center
+    justify-content center
+    top $navbar-height
+    left 0
+    width 100%
+    height 200px - $navbar-height
 
 generate-decoration-bottom(10, 50, 100)
 
