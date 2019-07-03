@@ -6,21 +6,25 @@ if (typeof(window.RenderLoop) !== 'undefined'){
     var cnv = null;
     var ctx = null;
 
+    // Set-able variables.
     var minParticleSize = 20;
     var maxParticleSize = 60;
     var maxParticleSpeed = 50;
     var minParticleSpeed = 10;
-    var minParticleDistance = 30;
-    var maxParticleDistance = 80;
-    var maxParticles = 60;
-    var particles = [];
-
-    // Set-able variables.
+    var minParticleDistance = 15;
+    var maxParticleDistance = 65; 
+    var minParticleLife = 10.0; // In seconds.
+    var maxParticleLife = 20.0;
+    var maxParticles = 20;
+    var particlesAttract = false;
+    var particlesLinearTrack = true;
     var boxSize = 10;
     var boxSpacing = 2;
     var boxColor = [0,0,0];
     var edgeColor = [96,96,96];
     var glowColor = [255,255,255];
+
+    var particles = [];
 
     // Computed variables.
     var boxCountH = 0;
@@ -105,26 +109,43 @@ if (typeof(window.RenderLoop) !== 'undefined'){
 
     function particle(w, h){
       this.alive = true;
-      this.x = 0;
-      this.y = 0;
+      this.sz = minParticleSize + (Math.random()*(maxParticleSize - minParticleSize));
+      this.l = minParticleLife + (Math.random() * (maxParticleLife - minParticleLife));
+      this.x = -this.sz;
+      this.y = -this.sz;
 
       if (Math.random() < 0.5){
         this.x = Math.floor(Math.random() * w);
         if (Math.random() < 0.5)
-          this.y = h;
+          this.y = h + this.sz;
       } else {
         this.y = Math.floor(Math.random() * h);
         if (Math.random() < 0.5)
-          this.x = w;
+          this.x = w + this.sz;
       }
 
       this.s = minParticleSpeed + (Math.random() * (maxParticleSpeed - minParticleSpeed));
       this.v = new vec2d();
-      this.v.i = (w*0.5) - this.x;
-      this.v.j = (h*0.5) - this.y;
-      this.v.normalize();
+      if (particlesLinearTrack){
+        if(this.x < 0 || this.x > w){
+          if (this.x < 0){
+            this.v.i = 1;
+          } else {
+            this.v.i = -1;
+          }
+        } else {
+          if (this.y < 0){
+            this.v.j = 1;
+          } else {
+            this.v.j = -1;
+          }
+        }
+      } else {
+        this.v.i = (w*0.5) - this.x;
+        this.v.j = (h*0.5) - this.y;
+        this.v.normalize();
+      }
 
-      this.sz = minParticleSize + (Math.random()*(maxParticleSize - minParticleSize));
 
       this.distanceTo = function(x, y){
         var dv = (new vec2d()).set(
@@ -177,8 +198,11 @@ if (typeof(window.RenderLoop) !== 'undefined'){
         var dv = this.v.clone().mults(this.s * delta);
         this.x += dv.i;
         this.y += dv.j;
+        this.l -= delta;
+        if (this.l < 1.0)
+          this.sz = this.l * this.sz;
 
-        if (this.x < 0 || this.y < 0 || this.x > w || this.y > h)
+        if (this.l <= 0.0 || this.x < -this.sz || this.y < -this.sz || this.x > w + this.sz || this.y > h + this.sz)
           this.alive = false;
       }
     }
@@ -286,16 +310,22 @@ if (typeof(window.RenderLoop) !== 'undefined'){
 
       while (particles.length < maxParticles)
         particles.push(new particle(cnv.width, cnv.height));
-      for (let i=0; i < particles.length; i++){
-        for (let j=i+1; j < particles.length; j++){
-          particles[i].force(particles[j]);
-          particles[j].force(particles[i]);
+      if (particlesAttract){
+        for (let i=0; i < particles.length; i++){
+          for (let j=i+1; j < particles.length; j++){
+            particles[i].force(particles[j]);
+            particles[j].force(particles[i]);
+          }
         }
       }
       particles.forEach((p)=>{p.update(delta);});
       particles = particles.filter((p)=>{return p.alive;});
 
       ctx.clearRect(0,0,cnv.width, cnv.height);
+      //ctx.save();
+      //ctx.fillStyle = rgbToHex(boxColor[0], boxColor[1], boxColor[2]);
+      //ctx.fillRect(0, 0, cnv.width, cnv.height);
+      //ctx.restore();
 
       var bs = boxSize + (2 * boxSpacing);
       var y = renderYOffset;
@@ -356,6 +386,40 @@ if (typeof(window.RenderLoop) !== 'undefined'){
               ctx = cnv.getContext("2d");
           }
         }
+        return TechnoFlies;
+      },
+
+      setBoxSize: function(size){
+        if (size > 1)
+          boxSize = size;
+        return TechnoFlies;
+      },
+
+      setBoxSpacing: function(spacing){
+        if (spacing >= 0)
+          boxSpacing = spacing
+        return TechnoFlies;
+      },
+
+      setBoxColor: function(r, g, b){
+        boxColor[0] = Math.max(0, Math.min(255, r));
+        boxColor[1] = Math.max(0, Math.min(255, g));
+        boxColor[2] = Math.max(0, Math.min(255, b));
+        return TechnoFlies;
+      },
+
+      setEdgeColor: function(r, g, b){
+        edgeColor[0] = Math.max(0, Math.min(255, r));
+        edgeColor[1] = Math.max(0, Math.min(255, g));
+        edgeColor[2] = Math.max(0, Math.min(255, b));
+        return TechnoFlies;
+      },
+
+      setGlowColor: function(r, g, b){
+        glowColor[0] = Math.max(0, Math.min(255, r));
+        glowColor[1] = Math.max(0, Math.min(255, g));
+        glowColor[2] = Math.max(0, Math.min(255, b));
+        return TechnoFlies;
       }
     };
 
