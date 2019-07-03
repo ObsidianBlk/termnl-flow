@@ -17,6 +17,7 @@
     <% }); %>
 
     <script src="<%- url_for("js/renderloop.js") %>" type="text/javascript"></script>
+    <script src="<%- url_for("js/technoflies.js") %>" type="text/javascript"></script>
   </head>
   <body> 
     <div class="grid">
@@ -28,6 +29,8 @@
   </body>
 
   <script>
+    TechnoFlies.setCanvas("header-canvas", true);
+    TechnoFlies.start();
     RenderLoop.start();
   </script>
 </html>
