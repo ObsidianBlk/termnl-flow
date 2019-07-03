@@ -1,7 +1,7 @@
 
 
 if (typeof(window.RenderLoop) !== 'undefined'){
-  window.TechnoFlies = (function(){ 
+  window.TechnoGrid = (function(){ 
     var running = false;
     var cnv = null;
     var ctx = null;
@@ -17,7 +17,7 @@ if (typeof(window.RenderLoop) !== 'undefined'){
     var maxParticleLife = 20.0;
     var maxParticles = 20;
     var particlesAttract = false;
-    var particlesLinearTrack = true;
+    var particlesAxisAligned = true;
     var boxSize = 10;
     var boxSpacing = 2;
     var boxColor = [0,0,0];
@@ -107,43 +107,45 @@ if (typeof(window.RenderLoop) !== 'undefined'){
     // -------------------------------------------------
 
 
-    function particle(w, h){
+    function particle(){
       this.alive = true;
       this.sz = minParticleSize + (Math.random()*(maxParticleSize - minParticleSize));
       this.l = minParticleLife + (Math.random() * (maxParticleLife - minParticleLife));
       this.x = -this.sz;
       this.y = -this.sz;
-
-      if (Math.random() < 0.5){
-        this.x = Math.floor(Math.random() * w);
-        if (Math.random() < 0.5)
-          this.y = h + this.sz;
-      } else {
-        this.y = Math.floor(Math.random() * h);
-        if (Math.random() < 0.5)
-          this.x = w + this.sz;
-      }
-
       this.s = minParticleSpeed + (Math.random() * (maxParticleSpeed - minParticleSpeed));
       this.v = new vec2d();
-      if (particlesLinearTrack){
-        if(this.x < 0 || this.x > w){
-          if (this.x < 0){
-            this.v.i = 1;
+
+      if (cnv !== null){
+        if (Math.random() < 0.5){
+          this.x = Math.floor(Math.random() * cnv.width);
+          if (Math.random() < 0.5)
+            this.y = cnv.height + this.sz;
+        } else {
+          this.y = Math.floor(Math.random() * cnv.height);
+          if (Math.random() < 0.5)
+            this.x = cnv.width + this.sz;
+        }
+ 
+        if (particlesAxisAligned){
+          if(this.x < 0 || this.x > cnv.width){
+            if (this.x < 0){
+              this.v.i = 1;
+            } else {
+              this.v.i = -1;
+            }
           } else {
-            this.v.i = -1;
+            if (this.y < 0){
+              this.v.j = 1;
+            } else {
+              this.v.j = -1;
+            }
           }
         } else {
-          if (this.y < 0){
-            this.v.j = 1;
-          } else {
-            this.v.j = -1;
-          }
+          this.v.i = (cnv.width*0.5) - this.x;
+          this.v.j = (cnv.height*0.5) - this.y;
+          this.v.normalize();
         }
-      } else {
-        this.v.i = (w*0.5) - this.x;
-        this.v.j = (h*0.5) - this.y;
-        this.v.normalize();
       }
 
 
@@ -202,7 +204,7 @@ if (typeof(window.RenderLoop) !== 'undefined'){
         if (this.l < 1.0)
           this.sz = this.l * this.sz;
 
-        if (this.l <= 0.0 || this.x < -this.sz || this.y < -this.sz || this.x > w + this.sz || this.y > h + this.sz)
+        if (this.l <= 0.0 || this.x < -this.sz || this.y < -this.sz || this.x > cnv.width + this.sz || this.y > cnv.height + this.sz)
           this.alive = false;
       }
     }
@@ -355,14 +357,16 @@ if (typeof(window.RenderLoop) !== 'undefined'){
       renderYOffset = Math.floor((cnv.height - (bs * boxCountV)) * 0.5);
     }
     
-    var TechnoFlies = {
+    var TechnoGrid = {
       start: function(){
         running = true;
+        return TechnoGrid;
       },
 
       stop: function(){
         running = false;
         particles = [];
+        return TechnoGrid;
       },
 
       isRunning: function(){return running;},
@@ -386,44 +390,92 @@ if (typeof(window.RenderLoop) !== 'undefined'){
               ctx = cnv.getContext("2d");
           }
         }
-        return TechnoFlies;
+        return TechnoGrid;
+      },
+
+      setParticleSize: function(minSize, maxSize){
+        if (minSize > 0 && minSize <= maxSize){
+          minParticleSize = minSize;
+          maxParticleSize = maxSize;
+        }
+        return TechnoGrid;
+      },
+
+      setParticleSpeed: function(minSpeed, maxSpeed){
+        if (minSpeed > 0 && minSpeed <= maxSpeed){
+          minParticleSpeed = minSpeed;
+          maxParticleSpeed = maxSpeed;
+        }
+        return TechnoGrid;
+      },
+
+      setParticleDistance: function(minDist, maxDist){
+        if (minDist > 0 && minDist <= maxDist){
+          minParticleDistance = minDist;
+          maxParticleDistance = maxDist;
+        }
+        return TechnoGrid;
+      },
+
+      setParticleLife: function(minLife, maxLife){
+        if (minLife > 0 && minLife <= maxLife){
+          minParticleLife = minLife;
+          maxParticleLife = maxLife;
+        }
+        return TechnoGrid;
+      },
+
+      setMaxParticles: function(pcount){
+        if (pcount > 0)
+          maxParticles = Math.floor(pcount);
+        return TechnoGrid;
+      },
+
+      setParticlesAttract: function(attract){
+        particlesAttract = (attract === true);
+        return TechnoGrid;
+      },
+
+      setParticlesAxisAligned: function(aligned){
+        particlesAxisAligned = (aligned === true);
+        return TechnoGrid;
       },
 
       setBoxSize: function(size){
         if (size > 1)
           boxSize = size;
-        return TechnoFlies;
+        return TechnoGrid;
       },
 
       setBoxSpacing: function(spacing){
         if (spacing >= 0)
           boxSpacing = spacing
-        return TechnoFlies;
+        return TechnoGrid;
       },
 
       setBoxColor: function(r, g, b){
         boxColor[0] = Math.max(0, Math.min(255, r));
         boxColor[1] = Math.max(0, Math.min(255, g));
         boxColor[2] = Math.max(0, Math.min(255, b));
-        return TechnoFlies;
+        return TechnoGrid;
       },
 
       setEdgeColor: function(r, g, b){
         edgeColor[0] = Math.max(0, Math.min(255, r));
         edgeColor[1] = Math.max(0, Math.min(255, g));
         edgeColor[2] = Math.max(0, Math.min(255, b));
-        return TechnoFlies;
+        return TechnoGrid;
       },
 
       setGlowColor: function(r, g, b){
         glowColor[0] = Math.max(0, Math.min(255, r));
         glowColor[1] = Math.max(0, Math.min(255, g));
         glowColor[2] = Math.max(0, Math.min(255, b));
-        return TechnoFlies;
+        return TechnoGrid;
       }
     };
 
-    return TechnoFlies;
+    return TechnoGrid;
   })();
 } else {
   console.error("RenderLoop not found. TechnoFlies not loaded.");

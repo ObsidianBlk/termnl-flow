@@ -17,8 +17,8 @@
     <% }); %>
 
     <script src="<%- url_for("js/renderloop.js") %>" type="text/javascript"></script>
-    <% if (theme.technoflies){ %>
-    <script src="<%- url_for("js/technoflies.js") %>" type="text/javascript"></script>
+    <% if (theme.technogrid){ %>
+    <script src="<%- url_for("js/technogrid.js") %>" type="text/javascript"></script>
     <% } %>
   </head>
   <body> 
@@ -31,14 +31,53 @@
   </body>
 
   <script>
-    <% if (theme.technoflies){ %>
-      TechnoFlies
+    <% if (theme.technogrid){ %>
+      TechnoGrid
         .setCanvas("header-canvas", true)
-        .setBoxSize(<%- theme.technoflies.boxSize %>)
-        .setBoxSpacing(<%- theme.technoflies.boxSpacing %>)
-        .setBoxColor(<%- theme.technoflies.boxColor.r %>,<%- theme.technoflies.boxColor.g %>,<%- theme.technoflies.boxColor.b %>)
-        .setEdgeColor(<%- theme.technoflies.edgeColor.r %>,<%- theme.technoflies.edgeColor.g %>,<%- theme.technoflies.edgeColor.b %>)
-        .setGlowColor(<%- theme.technoflies.glowColor.r %>,<%- theme.technoflies.glowColor.g %>,<%- theme.technoflies.glowColor.b %>)
+        .setParticlesAttract(<%- (theme.technogrid.particlesAttract === true) %>)
+        .setParticlesAxisAligned(<%- (theme.technogrid.particlesAxisAligned === true) %>)
+        <% if (theme.technogrid.maxParticles){ %>
+          .setMaxParticles(<%- theme.technogrid.maxParticles %>)
+        <% } %>
+        <% if (theme.technogrid.particleSize){ %>
+          .setParticleSize(
+            <%- theme.technogrid.particleSize.min %>,
+            <%- theme.technogrid.particleSize.max %>
+          )
+        <% } %>
+        <% if (theme.technogrid.particleSpeed){ %>
+          .setParticleSpeed(
+            <%- theme.technogrid.particleSpeed.min %>,
+            <%- theme.technogrid.particleSpeed.max %>
+          )
+        <% } %>
+        <% if (theme.technogrid.particleLife){ %>
+          .setParticleLife(
+            <%- theme.technogrid.particleLife.min %>,
+            <%- theme.technogrid.particleLife.max %>
+          )
+        <% } %>
+        <% if (theme.technogrid.particleDistance){ %>
+          .setParticleDistance(
+            <%- theme.technogrid.particleDistance.min %>,
+            <%- theme.technogrid.particleDistance.max %>
+          )
+        <% } %>
+        <% if (theme.technogrid.boxSize){ %>
+          .setBoxSize(<%- theme.technogrid.boxSize %>)
+        <% } %>
+        <% if (theme.technogrid.boxSpacing){ %>
+          .setBoxSpacing(<%- theme.technogrid.boxSpacing %>)
+        <% } %>
+        <% if (theme.technogrid.boxColor){ %>
+          .setBoxColor(<%- theme.technogrid.boxColor.r %>,<%- theme.technogrid.boxColor.g %>,<%- theme.technogrid.boxColor.b %>)
+        <% } %>
+        <% if (theme.technogrid.edgeColor){ %>
+          .setEdgeColor(<%- theme.technogrid.edgeColor.r %>,<%- theme.technogrid.edgeColor.g %>,<%- theme.technogrid.edgeColor.b %>)
+        <% } %>
+        <% if (theme.technogrid.glowColor){ %>
+          .setGlowColor(<%- theme.technogrid.glowColor.r %>,<%- theme.technogrid.glowColor.g %>,<%- theme.technogrid.glowColor.b %>)
+        <% } %>
         .start();
     <% } %>
     RenderLoop.start();
