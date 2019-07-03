@@ -31,7 +31,7 @@ window.RenderLoop = (function(){
     }
     DTMonitor(dt);
 
-    CallCBL(dt);
+    CallCBL(dt/1000);
 
     if (running)
       window.requestAnimationFrame(heartbeat);
