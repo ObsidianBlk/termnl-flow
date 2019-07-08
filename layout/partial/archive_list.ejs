@@ -1,0 +1,28 @@
+<ul>
+<%
+var lastyear = null;
+var lastmonth = null;
+var monthname = "";
+var count = 0;
+
+for(let i=0; i < site.posts.length; i++){
+  var year = site.posts.data[i].date.year();
+  var month = site.posts.data[i].date.month();
+  if (lastyear !== year || lastmonth !== month){
+    lastyear = year;
+    lastmonth = month;
+    if (count > 0){ %>
+      [<%- count %>]</a></li>
+    <% } %>
+      <li><a href="<%- url_for("archive/" + lastyear + "/" + lastmonth) %>"><%- lastyear %>, <%- site.posts.data[i].date.format('MMM') %>
+    <%
+    count = 1; 
+  } else {
+    count += 1;
+  }
+}
+if (count > 0){ %>
+  [<%- count %>]</a></li>
+<% } %>
+
+</ul>
