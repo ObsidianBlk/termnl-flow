@@ -1,4 +1,48 @@
-<ul>
+<%
+function getYear(dc, year){
+  for (let i=0; i < dc.length; i++){
+    if (dc[i].year === year)
+      return i;
+  }
+  return -1;
+}
+
+function getMonth(dc, year, month){
+  var yi = getYear(dc, year);
+  if (yi >= 0){
+    for (let i=0; i < dc[yi].month.length; i++){
+      if (dc[yi].month[i].month === month)
+        return i;
+    }
+  }
+  return -1;
+}
+
+var data = (function(){
+  var dc = [];
+  site.posts.each(function(post){
+    var year = post.date.year();
+    var month = post.date.month();
+    var yi = getYear(dc, year);
+    if (yi < 0){
+      yi = dc.length;
+      dc.push({year:year, total: 0, month:[]});
+    }
+    var mi = getMonth(dc, year, month);
+    if (mi < 0){
+      mi = dc[yi].month.length;
+      var murl = ((month < 9) ? "" : "0") + (month + 1);
+      dc[yi].month.push({month:month, total:0, surl:murl, name:post.date.format('MMM')});
+    }
+
+    dc[yi].total += 1;
+    dc[yi].month[mi].total += 1;
+  });
+  return dc;
+});
+%>
+
+<ul class="accordian-menu">
 <%
 var lastyear = null;
 var lastmonth = null;
@@ -7,14 +51,25 @@ var count = 0;
 
 for(let i=0; i < site.posts.length; i++){
   var year = site.posts.data[i].date.year();
-  var month = site.posts.data[i].date.month();
+  var month = "" + (site.posts.data[i].date.month() + 1);
+  if (month.length < 2)
+    month = "0" + month;
   if (lastyear !== year || lastmonth !== month){
+    if (year !== lastyear){
+      if (count > 0) { %>
+        </ul></li>
+      <% } %>
+        <li><a href="<%- url_for("archives/" + year) %>"><span class="big-text"><%- year %></span></a>
+          <ul class="accordian-menu sub-menu">
+      <%
+    }
+
     lastyear = year;
     lastmonth = month;
     if (count > 0){ %>
       [<%- count %>]</a></li>
     <% } %>
-      <li><a href="<%- url_for("archive/" + lastyear + "/" + lastmonth) %>"><%- lastyear %>, <%- site.posts.data[i].date.format('MMM') %>
+      <li><a href="<%- url_for("archives/" + lastyear + "/" + lastmonth) %>"><%- site.posts.data[i].date.format('MMM') %></a>
     <%
     count = 1; 
   } else {
@@ -22,7 +77,8 @@ for(let i=0; i < site.posts.length; i++){
   }
 }
 if (count > 0){ %>
-  [<%- count %>]</a></li>
+  [<%- count %>]</li>
+  </ul></li>
 <% } %>
 
 </ul>

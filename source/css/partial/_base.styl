@@ -24,7 +24,27 @@ a
 
 @import "partial/_containers.styl"
 @import "partial/_navmenu.styl"
+@import "partial/_accordianmenu.styl"
 @import "partial/_posts.styl"
+
+h1.section-title,
+h2.section-title,
+h3.section-title,
+h4.section-title,
+h5.section-title,
+h6.section-title
+  position relative
+  font-family $font-title
+  color $color-light
+  margin 0 0 $font-heading-size-sm 0
+  padding 0
+  &:after
+    position absolute
+    content ''
+    left 0
+    bottom -1px
+    width 75%
+    border-bottom 1px solid $color-term-border
 
 .full-width
   width 100%
@@ -59,6 +79,9 @@ a
 .hidden
   display none
 
+.big-text
+  font-size $font-heading-size-sm
+
 .site-title
   font $font-title-size-sm $font-title
   color $text-color-title
@@ -84,9 +107,20 @@ generate-grid("cell-sm", 12)
 
   .hidden-md, .hidden-sm-md, .hidden-md-lg
     display none
-  
+
+  h1.section-title,
+  h2.section-title,
+  h3.section-title,
+  h4.section-title,
+  h5.section-title,
+  h6.section-title
+    margin 0 0 $font-heading-size-md 0
+    
   generate-grid("cell-md", 12)
-  
+
+  .big-text
+    font-size $font-heading-size-md 
+ 
   .site-title
     font-size $font-title-size-md
   
@@ -100,7 +134,18 @@ generate-grid("cell-sm", 12)
   .hidden-lg, .hidden-md-lg
     display none
 
+  h1.section-title,
+  h2.section-title,
+  h3.section-title,
+  h4.section-title,
+  h5.section-title,
+  h6.section-title
+    margin 0 0 $font-heading-size-lg 0
+
   generate-grid("cell-lg", 12)
+
+  .big-text
+    font-size $font-heading-size-lg
   
   .site-title
     font-size $font-title-size-lg
