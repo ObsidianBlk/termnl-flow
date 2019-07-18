@@ -55,7 +55,7 @@
             <% if (page.prev) { %>
               <div class="post-prev-decoration">
                 <div class="content">
-                  <a href="<%- url_for(page.prev) %>">Previous Post</a>
+                  <a href="<%- url_for(page.prev.path) %>">Previous Post</a>
                 </div>
               </div>
             <% } %>
@@ -64,7 +64,7 @@
             <% if (page.next) { %>
               <div class="post-next-decoration">
                 <div class="content">
-                  <a href="<%- url_for(page.next) %>">Next Post</a>
+                  <a href="<%- url_for(page.next.path) %>">Next Post</a>
                 </div>
               </div>
             <% } %>
