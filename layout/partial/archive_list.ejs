@@ -18,6 +18,7 @@ function getMonth(dc, year, month){
   return -1;
 }
 
+var acc_tag = (tag) ? tag : "";
 var data = (function(){
   var dc = [];
   site.posts.each(function(post){
@@ -38,47 +39,44 @@ var data = (function(){
     dc[yi].total += 1;
     dc[yi].month[mi].total += 1;
   });
+
+  dc.forEach(function(item){
+    item.month.sort(function(a, b){
+      return a.month - b.month;
+    });
+  });
+
+  dc.sort(function(a, b){
+    return b.year - a.year;
+  });
   return dc;
-});
+})();
 %>
 
-<ul class="accordian-menu">
-<%
-var lastyear = null;
-var lastmonth = null;
-var monthname = "";
-var count = 0;
-
-for(let i=0; i < site.posts.length; i++){
-  var year = site.posts.data[i].date.year();
-  var month = "" + (site.posts.data[i].date.month() + 1);
-  if (month.length < 2)
-    month = "0" + month;
-  if (lastyear !== year || lastmonth !== month){
-    if (year !== lastyear){
-      if (count > 0) { %>
-        </ul></li>
-      <% } %>
-        <li><a href="<%- url_for("archives/" + year) %>"><span class="big-text"><%- year %></span></a>
-          <ul class="accordian-menu sub-menu">
-      <%
-    }
-
-    lastyear = year;
-    lastmonth = month;
-    if (count > 0){ %>
-      [<%- count %>]</a></li>
-    <% } %>
-      <li><a href="<%- url_for("archives/" + lastyear + "/" + lastmonth) %>"><%- site.posts.data[i].date.format('MMM') %></a>
-    <%
-    count = 1; 
-  } else {
-    count += 1;
-  }
-}
-if (count > 0){ %>
-  [<%- count %>]</li>
-  </ul></li>
-<% } %>
-
-</ul>
+<div class="accordian-menu">
+<% data.forEach(function(yitem){ %>
+  <div>
+    <input type="checkbox" id="<%- acc_tag %>year<%- yitem.year %>" name="archive-list">
+    <label class="accordian-title" for="<%- acc_tag %>year<%- yitem.year %>"> 
+      <i class="closed big-text fa fa-caret-square-right"></i>
+      <i class="open big-text fa fa-caret-square-down"></i>
+      <a href="<%- url_for("archives/" + yitem.year) %>">
+        <span class="big-text">
+          <%- yitem.year %> [ <%- yitem.total %> ]
+        </span>
+      </a>
+    </label> 
+    <div class="accordian-content">
+      <ul class="sub-menu">
+      <% yitem.month.forEach(function(mitem){ %>
+        <li>
+          <a href="<%- url_for("archives/" + yitem.year + "/" + mitem.murl) %>">
+            <%- mitem.name %> [ <%- mitem.total %> ]
+          </a>
+        </li>
+      <% }); %>
+      </ul>
+    </div>
+  </div>
+<% }); %>
+</div>

@@ -1,13 +1,34 @@
 
-ul.accordian-menu
-  margin 0
-  padding 0 
-  list-style none
-  & .sub-menu
-    padding-left 1em
+.accordian-menu
+  & .accordian-title
+    display flex
 
-.accordian-menu li > .sub-menu
-  display none
+  & .accordian-content
+    display none
 
-.accordian-menu li:hover > .sub-menu
-  display inherit
+  & label
+    cursor pointer
+
+  & ul.sub-menu
+    margin 0
+    padding 0
+    list-style none
+
+  & input[type="checkbox"]
+    display none
+    &:checked ~ .accordian-content
+      display inherit
+    &:checked ~ label .closed
+      display none
+    &:checked ~ label .open
+      display inherit
+
+  & label .closed
+    display inherit
+    margin-right 0.5em
+
+  & label .open
+    display none
+    margin-right 0.5em
+
+
